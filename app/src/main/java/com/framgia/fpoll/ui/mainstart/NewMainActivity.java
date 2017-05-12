@@ -16,7 +16,9 @@ public class NewMainActivity extends BaseActivity {
     private NewMainContract.ViewModel mViewModel;
 
     public static Intent getInstance(Context context) {
-        return new Intent(context, NewMainActivity.class);
+        Intent intent = new Intent(context, NewMainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
     }
 
     @Override

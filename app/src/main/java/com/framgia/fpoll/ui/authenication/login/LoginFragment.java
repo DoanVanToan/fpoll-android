@@ -19,7 +19,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.Collections;
 
-import static android.app.Activity.RESULT_OK;
 import static com.framgia.fpoll.ui.introduction.IntroduceActivity.EXTRA_OPEN_FROM_MAIN;
 import static com.framgia.fpoll.util.Constant.BundleConstant.BUNDLE_EVENT_SWITCH_UI;
 import static com.framgia.fpoll.util.Constant.DataConstant.DATA_PUBLIC_PROFILE;
@@ -129,11 +128,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     public void loginSuccess() {
         hideProgressDialog();
         ActivityUtil.showToast(getActivity(), R.string.msg_login_success);
-        if (mIsOpenFromMain) {
-            getActivity().setResult(RESULT_OK);
-        } else {
-            startActivity(NewMainActivity.getInstance(getContext()));
-        }
+        startActivity(NewMainActivity.getInstance(getContext()));
         getActivity().finish();
     }
 
