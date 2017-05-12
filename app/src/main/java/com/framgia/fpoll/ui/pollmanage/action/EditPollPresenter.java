@@ -158,7 +158,6 @@ public class EditPollPresenter implements EditPollContract.Presenter {
             @Override
             public void onSuccess(String data) {
                 mView.showMessage(data);
-                loadData();
                 mView.hideProgressDialog();
                 mView.setResult();
             }

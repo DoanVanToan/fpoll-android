@@ -1,5 +1,6 @@
 package com.framgia.fpoll.ui.pollmanage.information;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -29,9 +30,11 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Calendar;
 
+import static android.app.Activity.RESULT_OK;
 import static com.framgia.fpoll.util.Constant.BundleConstant.BUNDLE_POLL_ITEM;
 import static com.framgia.fpoll.util.Constant.BundleConstant.BUNDLE_TOKEN;
 import static com.framgia.fpoll.util.Constant.POSITION_LINK_INVITE;
+import static com.framgia.fpoll.util.Constant.RequestCode.REQUEST_CODE_RESULT;
 import static com.framgia.fpoll.util.Constant.Tag.DATE_PICKER_TAG;
 import static com.framgia.fpoll.util.Constant.Tag.TIME_PICKER_TAG;
 import static com.framgia.fpoll.util.Constant.WebUrl.OPTION_DATE;
@@ -115,9 +118,22 @@ public class PollInformationFragment extends Fragment
                     if (title.length == OPTION_SIZE) option.setDate(title[OPTION_DATE]);
                 }
             }
-            startActivity(ModifyPollActivity.getModifyIntent(getActivity(), mPoll.getPoll()));
+            startActivityForResult(
+                    ModifyPollActivity.getModifyIntent(getActivity(), mPoll.getPoll()),
+                    REQUEST_CODE_RESULT);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_RESULT) {
+            ((ManagePollActivity) getActivity()).setUpdatePoll(true);
+            ((ManagePollActivity) getActivity()).updateData();
+
+            if (mPresenter != null) mPresenter.loadData();
+        }
     }
 
     @Override
@@ -210,5 +226,9 @@ public class PollInformationFragment extends Fragment
     @Override
     public void showMessage(int msg) {
         ActivityUtil.showToast(getActivity(), msg);
+    }
+
+    public void loadData() {
+        if (mPresenter != null) mPresenter.loadData();
     }
 }

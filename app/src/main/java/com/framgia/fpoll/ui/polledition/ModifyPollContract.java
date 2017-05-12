@@ -19,6 +19,8 @@ public interface ModifyPollContract {
         void showMessage(int message);
 
         void notifyUI(PollItem poll);
+
+        void setUpdatePoll(boolean isUpdatePoll);
     }
 
     interface Presenter {

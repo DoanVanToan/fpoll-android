@@ -109,4 +109,8 @@ public class EditPollFragment extends Fragment implements EditPollContract.View 
     public void startModifyPoll(PollItem poll) {
         startActivity(ModifyPollActivity.getModifyIntent(getActivity(), poll));
     }
+
+    public void loadData() {
+        if (mPresenter != null) mPresenter.loadData();
+    }
 }

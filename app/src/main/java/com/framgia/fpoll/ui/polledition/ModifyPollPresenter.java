@@ -104,6 +104,7 @@ public class ModifyPollPresenter implements ModifyPollContract.Presenter {
     }
 
     private void onUpdateSuccess(PollItem data) {
+        if (mView != null) mView.setUpdatePoll(true);
         mPoll = data;
         ActivityUtil.splitDateOptionOfPoll(mPoll);
         mView.hideProgress();
