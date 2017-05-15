@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
@@ -27,7 +26,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,15 +44,11 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.LikeView;
 import com.facebook.share.widget.ShareButton;
 import com.framgia.fpoll.R;
-import com.framgia.fpoll.data.model.authorization.User;
-import com.framgia.fpoll.databinding.PartialHeadBinding;
 import com.framgia.fpoll.ui.authenication.login.LoginType;
 import com.framgia.fpoll.ui.history.HistoryFragment;
 import com.framgia.fpoll.ui.history.pollhistory.PollHistoryPresenter;
 import com.framgia.fpoll.ui.introduction.IntroduceHandlerAction;
 import com.framgia.fpoll.ui.introduction.ViewPageAdapterAuto;
-import com.framgia.fpoll.ui.main.MainHandler;
-import com.framgia.fpoll.ui.main.MainPresenter;
 import com.framgia.fpoll.ui.pollcreated.CopyLinkType;
 import com.framgia.fpoll.ui.pollcreated.PollCreatedHandler;
 import com.framgia.fpoll.ui.pollcreation.option.OptionHandler;
@@ -360,26 +354,6 @@ public class DataBindingUtils {
                         view.setImageDrawable(circularBitmapDrawable);
                     }
                 });
-    }
-
-    @BindingAdapter({ "bind:bindHeader", "bind:user", "bind:isLogin" })
-    public static void loadHeader(NavigationView view, MainPresenter presenter, User user,
-            boolean isLogin) {
-        for (int i = 0; i < view.getHeaderCount(); i++) {
-            view.removeHeaderView(view.getHeaderView(i));
-        }
-        PartialHeadBinding binding =
-                PartialHeadBinding.inflate(LayoutInflater.from(view.getContext()));
-        binding.setUser(user);
-        binding.setHandler(new MainHandler(presenter));
-        binding.setIsLogin(presenter.getIsLogin().get());
-        view.getMenu().findItem(R.id.action_login).setVisible(!isLogin);
-        view.getMenu().findItem(R.id.action_log_out).setVisible(isLogin);
-        binding.executePendingBindings();
-        View v = binding.getRoot();
-        view.addHeaderView(v);
-        float height = v.getContext().getResources().getDimension(R.dimen.dp_200);
-        v.getLayoutParams().height = (int) height;
     }
 
     @BindingAdapter({ "bind:bindAdapter" })

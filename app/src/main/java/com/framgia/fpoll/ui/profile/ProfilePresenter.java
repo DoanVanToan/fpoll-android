@@ -107,7 +107,7 @@ public class ProfilePresenter implements ProfileContract.Presenter {
                 mPreference.writeLogin(false);
                 mViewModel.showMessage(data);
                 mViewModel.hideProgressDialog();
-                mViewModel.startLoginScreen();
+                mViewModel.reloadMainView();
                 mViewModel.setNullUser();
             }
 

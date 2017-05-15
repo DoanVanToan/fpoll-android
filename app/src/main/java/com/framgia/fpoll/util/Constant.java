@@ -32,7 +32,6 @@ public class Constant {
         public static final String DATA_PUBLIC_PROFILE = "public_profile";
         public static final String DATA_SPACE = "";
         public static final int NUMBER_SPACE = 1;
-        public static final int NUMBER_MIN_LIMIT = -1;
         public static final String DATA_PLASH = "/";
         public static final String DATA_NO_TITLE = "";
         public static final String DATA_PREFIX_TOKEN = "Bearer ";
@@ -57,7 +56,6 @@ public class Constant {
         public static final int REQUEST_LOGIN = 5;
         public static final int REQUEST_CREATE_POLL = 6;
         public static final int REQUEST_CODE_RESULT = 2;
-        public static final int REQUEST_PICK_IMAGE = 7;
         public static final int REQUEST_PROFILE_DETAIL = 8;
     }
 
@@ -103,11 +101,6 @@ public class Constant {
         public static final String PREF_SHOW_INTRODUCT = "PREF_SHOW_INTRODUCT";
     }
 
-    public class TypeChoose {
-        public static final int TYPE_MULTI = 1;
-        public static final int TYPE_SINGER = 0;
-    }
-
     public class TypeSetting {
         public static final int TYPE_INPUT_EMAIL = 1;
         public static final int TYPE_INPUT_NAME = 7;
@@ -136,9 +129,4 @@ public class Constant {
         public static final String LANGUAGE_EN = "en";
     }
 
-    public class Gender {
-        public static final int MALE = 0;
-        public static final int FE_MALE = 1;
-        public static final int OTHER = 2;
-    }
 }

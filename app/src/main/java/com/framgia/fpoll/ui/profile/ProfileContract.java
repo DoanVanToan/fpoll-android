@@ -55,6 +55,8 @@ public interface ProfileContract {
         void showMessage(String data);
 
         void setNullUser();
+
+        void reloadMainView();
     }
 
     interface Presenter extends BasePresenter {

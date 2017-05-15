@@ -213,6 +213,11 @@ public class ProfileViewModel extends BaseObservable implements ProfileContract.
         mUser.set(null);
     }
 
+    @Override
+    public void reloadMainView() {
+        mActivity.startActivity(NewMainActivity.getInstance(mContext));
+    }
+
     @Bindable
     public boolean isEditing() {
         return mEditing;

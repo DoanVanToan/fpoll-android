@@ -16,7 +16,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/FACEBOOK_KEY"/>
 
-        <activity android:name=".ui.main.MainActivity"/>
         <activity android:name=".ui.authenication.activity.AuthenticationActivity"/>
         <activity android:name=".ui.pollmanage.ManagePollActivity"/>
         <activity android:name=".ui.polledition.ModifyPollActivity"/>
