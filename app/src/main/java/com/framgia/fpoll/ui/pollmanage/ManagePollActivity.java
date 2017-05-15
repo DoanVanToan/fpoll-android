@@ -16,6 +16,7 @@ import com.framgia.fpoll.ui.pollmanage.information.PollInformationFragment;
 import com.framgia.fpoll.ui.pollmanage.result.ResultVoteFragment;
 import java.util.ArrayList;
 import java.util.List;
+import retrofit2.http.HEAD;
 
 import static com.framgia.fpoll.util.Constant.BundleConstant.BUNDLE_POLL_ITEM;
 import static com.framgia.fpoll.util.Constant.BundleConstant.BUNDLE_TOKEN;
@@ -27,6 +28,11 @@ public class ManagePollActivity extends BaseActivity implements ManagePollContra
     private DataInfoItem mPoll;
     private String mToken;
     private ViewPagerAdapter mAdapter;
+    private boolean mIsUpdatePoll;
+
+    private PollInformationFragment mInformationFragment;
+    private ResultVoteFragment mVoteFragment;
+    private EditPollFragment mEditPollFragment;
 
     public static Intent getPollIntent(Context context, DataInfoItem poll) {
         Intent intent = new Intent(context, ManagePollActivity.class);
@@ -76,14 +82,33 @@ public class ManagePollActivity extends BaseActivity implements ManagePollContra
     @Override
     public void start() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(PollInformationFragment.newInstance(mPoll, mToken));
-        fragments.add(ResultVoteFragment.newInstance(mToken));
-        fragments.add(EditPollFragment.newInstance(mToken));
+        mInformationFragment = PollInformationFragment.newInstance(mPoll, mToken);
+        fragments.add(mInformationFragment);
+        mVoteFragment = ResultVoteFragment.newInstance(mToken);
+        fragments.add(mVoteFragment);
+        mEditPollFragment = EditPollFragment.newInstance(mToken);
+        fragments.add(mEditPollFragment);
         String[] titles = getResources().getStringArray(R.array.array_manage);
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments, titles);
     }
 
+    public void setUpdatePoll(boolean isUpdatePoll) {
+        mIsUpdatePoll = isUpdatePoll;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsUpdatePoll) setResult(RESULT_OK);
+        super.onBackPressed();
+    }
+
     public ViewPagerAdapter getAdapter() {
         return mAdapter;
+    }
+
+    public void updateData() {
+        if (mInformationFragment != null) mInformationFragment.loadData();
+        if (mVoteFragment != null) mVoteFragment.loadData();
+        if (mEditPollFragment != null) mEditPollFragment.loadData();
     }
 }

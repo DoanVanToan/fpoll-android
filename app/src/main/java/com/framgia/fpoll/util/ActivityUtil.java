@@ -47,7 +47,7 @@ public class ActivityUtil {
     }
 
     public static void showToast(Context context, String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+        if (context != null && msg != null) Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
 
     public static String subLinkPoll(String pollLink) {

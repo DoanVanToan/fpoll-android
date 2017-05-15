@@ -34,6 +34,7 @@ public class ModifyPollActivity extends BaseActivity implements ModifyPollContra
     private EditInforFragment mInformationFragment;
     private EditOptionFragment mOptionFragment;
     private EditSettingFragment mSettingFragment;
+    private boolean mIsUpdatePoll;
 
     public static Intent getModifyIntent(Context context, PollItem data) {
         Intent intent = new Intent(context, ModifyPollActivity.class);
@@ -153,8 +154,21 @@ public class ModifyPollActivity extends BaseActivity implements ModifyPollContra
     }
 
     @Override
+    public void onBackPressed() {
+        if (mIsUpdatePoll) {
+            setResult(RESULT_OK);
+        }
+        super.onBackPressed();
+    }
+
+    @Override
     public void notifyUI(PollItem poll) {
         if (mOptionFragment != null) mOptionFragment.notifyUI(poll);
+    }
+
+    @Override
+    public void setUpdatePoll(boolean isUpdatePoll) {
+        mIsUpdatePoll = isUpdatePoll;
     }
 
     @Override
